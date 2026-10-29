@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Pass Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main>
+        <header>
+            <p class="eyebrow">Student performance</p>
+            <h1>Pass prediction</h1>
+            <p>Enter the student's details to get a model estimate.</p>
+        </header>
+
+        <form action="{{ url_for('predict') }}" method="post">
+            <fieldset>
+                <legend>Student and family</legend>
+                <div>
+                    <label>School
+                        <select name="school" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="GP">GP</option>
+                            <option value="MS">MS</option>
+                        </select>
+                    </label>
+                    <label>Sex
+                        <select name="sex" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="F">Female</option>
+                            <option value="M">Male</option>
+                        </select>
+                    </label>
+                    <label>Age
+                        <input name="age" type="number" min="15" max="22" step="1" required>
+                    </label>
+                    <label>Address
+                        <select name="address" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="U">Urban</option>
+                            <option value="R">Rural</option>
+                        </select>
+                    </label>
+                    <label>Family size
+                        <select name="famsize" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="GT3">More than 3</option>
+                            <option value="LE3">3 or fewer</option>
+                        </select>
+                    </label>
+                    <label>Parents' cohabitation status
+                        <select name="Pstatus" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="T">Together</option>
+                            <option value="A">Apart</option>
+                        </select>
+                    </label>
+                    <label>Mother's education (0-4)
+                        <input name="Medu" type="number" min="0" max="4" step="1" required>
+                    </label>
+                    <label>Father's education (0-4)
+                        <input name="Fedu" type="number" min="0" max="4" step="1" required>
+                    </label>
+                    <label>Mother's job
+                        <select name="Mjob" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="at_home">At home</option>
+                            <option value="health">Health</option>
+                            <option value="other">Other</option>
+                            <option value="services">Services</option>
+                            <option value="teacher">Teacher</option>
+                        </select>
+                    </label>
+                    <label>Father's job
+                        <select name="Fjob" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="at_home">At home</option>
+                            <option value="health">Health</option>
+                            <option value="other">Other</option>
+                            <option value="services">Services</option>
+                            <option value="teacher">Teacher</option>
+                        </select>
+                    </label>
+                    <label>Reason for choosing school
+                        <select name="reason" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="course">Course</option>
+                            <option value="home">Home</option>
+                            <option value="other">Other</option>
+                            <option value="reputation">Reputation</option>
+                        </select>
+                    </label>
+                    <label>Guardian
+                        <select name="guardian" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="mother">Mother</option>
+                            <option value="father">Father</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>School and support</legend>
+                <div>
+                    <label>Travel time (1-4)
+                        <input name="traveltime" type="number" min="1" max="4" step="1" required>
+                    </label>
+                    <label>Study time (1-4)
+                        <input name="studytime" type="number" min="1" max="4" step="1" required>
+                    </label>
+                    <label>Failures (0-3)
+                        <input name="failures" type="number" min="0" max="3" step="1" required>
+                    </label>
+                    <label>School support
+                        <select name="schoolsup" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </label>
+                    <label>Family educational support
+                        <select name="famsup" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </label>
+                    <label>Paid extra classes
+                        <select name="paid" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </label>
+                    <label>Extracurricular activities
+                        <select name="activities" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </label>
+                    <label>Attended nursery school
+                        <select name="nursery" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </label>
+                    <label>Wants higher education
+                        <select name="higher" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </label>
+                    <label>Internet access at home
+                        <select name="internet" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </label>
+                    <label>In a romantic relationship
+                        <select name="romantic" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Wellbeing and routine</legend>
+                <div>
+                    <label>Family relationship quality (1-5)
+                        <input name="famrel" type="number" min="1" max="5" step="1" required>
+                    </label>
+                    <label>Free time (1-5)
+                        <input name="freetime" type="number" min="1" max="5" step="1" required>
+                    </label>
+                    <label>Going out (1-5)
+                        <input name="goout" type="number" min="1" max="5" step="1" required>
+                    </label>
+                    <label>Workday alcohol use (1-5)
+                        <input name="Dalc" type="number" min="1" max="5" step="1" required>
+                    </label>
+                    <label>Weekend alcohol use (1-5)
+                        <input name="Walc" type="number" min="1" max="5" step="1" required>
+                    </label>
+                    <label>Health status (1-5)
+                        <input name="health" type="number" min="1" max="5" step="1" required>
+                    </label>
+                    <label>School absences (0-75)
+                        <input name="absences" type="number" min="0" max="75" step="1" required>
+                    </label>
+                </div>
+            </fieldset>
+
+            <div>
+                <button type="submit">Predict outcome</button>
+            </div>
+        </form>
+
+        {% if error %}
+            <p class="message error" role="alert">{{ error }}</p>
+        {% endif %}
+        {% if prediction is defined %}
+            <p class="message result" role="status">
+                {{ 'Likely to pass' if prediction == 'yes' else 'Model predicts not passing' }}
+            </p>
+        {% endif %}
+    </main>
+
+    <script>
+        const submittedValues = {{ form_data|default({})|tojson }};
+        for (const field of document.querySelectorAll("form [name]")) {
+            if (submittedValues[field.name] !== undefined) {
+                field.value = submittedValues[field.name];
+            }
+        }
+    </script>
+</body>
+</html>
